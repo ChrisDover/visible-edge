@@ -1,0 +1,1741 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Visible Edge — CMMC Lead Operations Brief</title>
+<link href="https://fonts.googleapis.com/css2?family=Funnel+Display:wght@400;500;600;700;800&family=IBM+Plex+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #0a0d12;
+    --panel: #0d1117;
+    --panel-2: #11161e;
+    --border: #1e2530;
+    --border-hi: #2a3340;
+    --text: #ffffff;
+    --text-dim: #ffffff;
+    --text-mute: #ffffff;
+    --text-faint: #ffffff;
+    --amber: #fbbf24;
+    --amber-dim: #f59e0b;
+    --green: #34d399;
+    --blue: #60a5fa;
+    --red: #f87171;
+  }
+  html, body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'IBM Plex Sans', system-ui, sans-serif;
+    font-size: 13px;
+    line-height: 1.5;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+  }
+  .display { font-family: 'Funnel Display', system-ui, sans-serif; }
+  .mono { font-family: 'JetBrains Mono', ui-monospace, monospace; }
+  .tab { font-variant-numeric: tabular-nums; }
+
+  .page {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 32px 36px 48px;
+    background:
+      radial-gradient(ellipse 600px 300px at 85% -10%, rgba(251,191,36,0.06), transparent 70%),
+      radial-gradient(ellipse 500px 400px at -10% 30%, rgba(96,165,250,0.04), transparent 70%),
+      var(--bg);
+  }
+
+  /* HEADER */
+  .header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 28px;
+  }
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .logo {
+    width: 44px; height: 44px;
+    border: 1.5px solid var(--amber);
+    transform: rotate(45deg);
+    display: flex; align-items: center; justify-content: center;
+    position: relative;
+  }
+  .logo::before {
+    content: '';
+    width: 8px; height: 8px;
+    background: var(--amber);
+    transform: rotate(-45deg);
+  }
+  .logo::after {
+    content: '';
+    position: absolute;
+    inset: -6px;
+    border: 1px solid rgba(251,191,36,0.2);
+    transform: rotate(0deg);
+  }
+  .brand-text .name {
+    font-family: 'Funnel Display', sans-serif;
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1;
+    color: #fff;
+  }
+  .brand-text .sub {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    color: var(--text-mute);
+    margin-top: 6px;
+    font-weight: 600;
+  }
+  .header-meta {
+    text-align: right;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    line-height: 1.7;
+    color: var(--text-mute);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+  .header-meta .label { color: var(--text-faint); font-weight: 700; }
+  .header-meta .val { color: var(--text-dim); font-weight: 400; }
+  .header-meta .live { color: var(--green); }
+  .live::after {
+    content: '';
+    display: inline-block;
+    width: 6px; height: 6px;
+    background: var(--green);
+    border-radius: 50%;
+    margin-left: 6px;
+    box-shadow: 0 0 8px var(--green);
+  }
+
+  /* TITLE BLOCK */
+  .title-block { margin-bottom: 36px; }
+  .title-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.3em;
+    color: var(--amber);
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 700;
+  }
+  .title-eyebrow::before {
+    content: '';
+    width: 18px; height: 1px;
+    background: var(--amber);
+  }
+  .title {
+    font-family: 'Funnel Display', sans-serif;
+    font-size: 44px;
+    font-weight: 800;
+    letter-spacing: -0.025em;
+    line-height: 1.02;
+    color: #fff;
+    margin-bottom: 14px;
+  }
+  .title em {
+    font-style: italic;
+    font-weight: 500;
+    color: var(--amber);
+  }
+  .title-sub {
+    font-size: 15px;
+    line-height: 1.55;
+    color: var(--text-dim);
+    max-width: 880px;
+    font-weight: 400;
+  }
+
+  /* MARKET STRIP */
+  .strip {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    background: var(--panel);
+    margin-bottom: 36px;
+    overflow: hidden;
+  }
+  .strip-cell {
+    padding: 16px 20px;
+    border-right: 1px solid var(--border);
+  }
+  .strip-cell:last-child { border-right: none; }
+  .strip-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--text-mute);
+    margin-bottom: 8px;
+    font-weight: 700;
+  }
+  .strip-val {
+    font-family: 'Funnel Display', sans-serif;
+    font-size: 26px;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+  }
+  .strip-val .accent { color: var(--amber); }
+  .strip-sub {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    color: var(--text-faint);
+    margin-top: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 500;
+  }
+
+  /* SECTION HEADERS */
+  .section-h {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 18px;
+  }
+  .section-h .num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--amber);
+    letter-spacing: 0.15em;
+    font-weight: 700;
+  }
+  .section-h .title-h {
+    font-family: 'Funnel Display', sans-serif;
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    color: #fff;
+  }
+  .section-h .line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, var(--border), transparent);
+  }
+
+  section { margin-bottom: 36px; }
+
+  /* PIPELINE DIAGRAM */
+  .pipeline {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0;
+    margin-bottom: 8px;
+  }
+  .stage {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-right: none;
+    padding: 16px 14px 14px;
+    position: relative;
+  }
+  .stage:last-child { border-right: 1px solid var(--border); }
+  .stage::after {
+    content: '';
+    position: absolute;
+    right: -7px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 14px;
+    height: 14px;
+    background: var(--bg);
+    border-right: 1px solid var(--border);
+    border-top: 1px solid var(--border);
+    transform: translateY(-50%) rotate(45deg);
+    z-index: 2;
+  }
+  .stage:last-child::after { display: none; }
+  .stage-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    color: var(--amber);
+    letter-spacing: 0.2em;
+    margin-bottom: 8px;
+    font-weight: 700;
+  }
+  .stage-name {
+    font-family: 'Funnel Display', sans-serif;
+    font-size: 13px;
+    font-weight: 800;
+    color: #fff;
+    margin-bottom: 6px;
+    line-height: 1.15;
+  }
+  .stage-desc {
+    font-size: 11px;
+    color: var(--text-dim);
+    line-height: 1.45;
+    margin-bottom: 10px;
+    font-weight: 400;
+  }
+  .stage-tools {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+  .tool-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 8.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 2px 5px;
+    background: rgba(251,191,36,0.08);
+    border: 1px solid rgba(251,191,36,0.2);
+    color: var(--amber);
+    border-radius: 2px;
+    font-weight: 700;
+  }
+  .tool-tag.blue { background: rgba(96,165,250,0.08); border-color: rgba(96,165,250,0.2); color: var(--blue); }
+  .tool-tag.green { background: rgba(52,211,153,0.08); border-color: rgba(52,211,153,0.2); color: var(--green); }
+  .tool-tag.dim { background: transparent; border-color: var(--border-hi); color: var(--text-mute); }
+
+  /* FEEDBACK LOOP arrow */
+  .loop-back {
+    margin-top: 12px;
+    padding: 12px 16px;
+    background: linear-gradient(90deg, rgba(251,191,36,0.06), transparent);
+    border: 1px solid rgba(251,191,36,0.2);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .loop-icon {
+    width: 28px;
+    height: 28px;
+    border: 1px solid var(--amber);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--amber);
+    font-size: 14px;
+    flex-shrink: 0;
+  }
+  .loop-text {
+    font-size: 12px;
+    color: var(--text-dim);
+    line-height: 1.5;
+    font-weight: 400;
+  }
+  .loop-text strong { color: #fff; font-weight: 700; }
+
+  /* TWO COL */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+  }
+
+  /* DAILY LOOP */
+  .timeline {
+    position: relative;
+    padding-left: 24px;
+  }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 5px;
+    top: 8px;
+    bottom: 8px;
+    width: 1px;
+    background: linear-gradient(to bottom, var(--amber), var(--border), var(--amber));
+  }
+  .tl-row {
+    display: grid;
+    grid-template-columns: 60px 1fr;
+    gap: 14px;
+    padding: 7px 0;
+    position: relative;
+    align-items: baseline;
+  }
+  .tl-row::before {
+    content: '';
+    position: absolute;
+    left: -22px;
+    top: 14px;
+    width: 7px;
+    height: 7px;
+    background: var(--bg);
+    border: 1.5px solid var(--text-mute);
+    border-radius: 50%;
+  }
+  .tl-row.hi::before {
+    border-color: var(--amber);
+    background: var(--amber);
+    box-shadow: 0 0 8px rgba(251,191,36,0.5);
+  }
+  .tl-time {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--text-mute);
+    letter-spacing: 0.05em;
+    font-variant-numeric: tabular-nums;
+    text-align: right;
+    font-weight: 700;
+  }
+  .tl-row.hi .tl-time { color: var(--amber); }
+  .tl-event {
+    font-size: 12px;
+    color: var(--text-dim);
+    line-height: 1.45;
+  }
+  .tl-row.hi .tl-event { color: #fff; font-weight: 700; }
+
+  /* STACK TABLE */
+  .stack {
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .stack-row {
+    display: grid;
+    grid-template-columns: 90px 1fr 1fr;
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--border);
+    font-size: 11.5px;
+    align-items: center;
+  }
+  .stack-row:last-child { border-bottom: none; }
+  .stack-row.head {
+    background: var(--panel);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--text-mute);
+    padding: 8px 14px;
+    font-weight: 700;
+  }
+  .stack-layer {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--amber);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 700;
+  }
+  .stack-tool { color: #fff; font-weight: 600; }
+  .stack-purpose { color: var(--text-dim); font-size: 11px; font-weight: 400; }
+
+  /* TIMELINE WEEKS */
+  .weeks {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+  }
+  .week {
+    border: 1px solid var(--border);
+    background: var(--panel);
+    border-radius: 4px;
+    padding: 16px 14px;
+    position: relative;
+    overflow: hidden;
+  }
+  .week::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, var(--amber), transparent);
+  }
+  .week-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    color: var(--amber);
+    letter-spacing: 0.2em;
+    margin-bottom: 6px;
+    font-weight: 700;
+  }
+  .week-title {
+    font-family: 'Funnel Display', sans-serif;
+    font-size: 14px;
+    font-weight: 800;
+    color: #fff;
+    margin-bottom: 6px;
+    line-height: 1.15;
+  }
+  .week-dates {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9.5px;
+    color: var(--text-mute);
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+  .week-deliv {
+    font-size: 11px;
+    color: var(--text-dim);
+    line-height: 1.45;
+    padding-top: 10px;
+    border-top: 1px dashed var(--border-hi);
+    font-weight: 400;
+  }
+  .week-deliv strong { color: var(--amber); display: block; font-size: 9px; text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 4px; font-family: 'JetBrains Mono', monospace; font-weight: 700; }
+
+  /* METRICS BLOCK */
+  .metrics {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .metric {
+    padding: 18px 18px 16px;
+    border-right: 1px solid var(--border);
+    background: var(--panel);
+  }
+  .metric:last-child { border-right: none; }
+  .metric-h {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--amber);
+    margin-bottom: 12px;
+    font-weight: 700;
+  }
+  .metric-list {
+    list-style: none;
+    font-size: 11.5px;
+    line-height: 1.6;
+    font-weight: 400;
+  }
+  .metric-list li {
+    padding: 4px 0;
+    color: var(--text-dim);
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 10px;
+    align-items: baseline;
+  }
+  .metric-list li .v {
+    font-family: 'JetBrains Mono', monospace;
+    color: #fff;
+    font-variant-numeric: tabular-nums;
+    font-weight: 700;
+    font-size: 11px;
+  }
+
+  /* UI PREVIEW */
+  .ui-preview {
+    border: 1px solid var(--border);
+    background: var(--panel);
+    border-radius: 4px;
+    padding: 16px;
+    margin-top: 12px;
+  }
+  .ui-frame {
+    background: var(--bg);
+    border: 1px solid var(--border-hi);
+    border-radius: 3px;
+    padding: 14px 16px;
+    font-size: 11px;
+  }
+  .ui-frame .ui-h {
+    display: flex; justify-content: space-between;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 12px;
+  }
+  .ui-frame .ui-h .l { font-family: 'Funnel Display', sans-serif; font-weight: 800; color: #fff; font-size: 12px; }
+  .ui-frame .ui-h .r { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--text-mute); text-transform: uppercase; letter-spacing: 0.1em; font-weight: 600; }
+  .ui-row {
+    display: grid;
+    grid-template-columns: 18px 1fr auto auto;
+    gap: 10px;
+    padding: 6px 0;
+    border-bottom: 1px solid var(--border);
+    align-items: center;
+    font-size: 11px;
+  }
+  .ui-row:last-child { border-bottom: none; }
+  .ui-row .n { font-family: 'JetBrains Mono', monospace; color: var(--text-faint); font-size: 9px; font-weight: 700; }
+  .ui-row .name { color: #fff; font-weight: 700; }
+  .ui-row .meta { font-family: 'JetBrains Mono', monospace; color: var(--text-mute); font-size: 9.5px; font-weight: 400; }
+  .ui-row .badge {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding: 2px 5px;
+    border-radius: 2px;
+    border: 1px solid;
+    font-weight: 700;
+  }
+  .ui-row .badge.amber { background: rgba(251,191,36,0.08); border-color: rgba(251,191,36,0.3); color: var(--amber); }
+  .ui-row .badge.red { background: rgba(248,113,113,0.08); border-color: rgba(248,113,113,0.3); color: var(--red); }
+  .ui-row .badge.blue { background: rgba(96,165,250,0.08); border-color: rgba(96,165,250,0.3); color: var(--blue); }
+
+  /* PAGE BREAK */
+  .page-break {
+    height: 60px;
+    border-top: 1px dashed var(--border-hi);
+    margin: 30px 0 0;
+    position: relative;
+  }
+  .page-break::before {
+    content: 'PAGE 02 / FINANCIAL';
+    position: absolute;
+    top: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--bg);
+    padding: 0 14px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.25em;
+    color: var(--amber);
+    font-weight: 700;
+  }
+
+  /* TEMPO CARDS */
+  .tempos {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+  }
+  .tempo {
+    border: 1px solid var(--border);
+    background: var(--panel);
+    border-radius: 4px;
+    padding: 18px 18px 16px;
+    position: relative;
+    overflow: hidden;
+  }
+  .tempo.full {
+    border-color: rgba(251,191,36,0.35);
+    background: linear-gradient(180deg, rgba(251,191,36,0.04), var(--panel) 60%);
+  }
+  .tempo-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    color: var(--amber);
+    margin-bottom: 10px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .tempo-tag .dot {
+    width: 6px; height: 6px;
+    background: var(--amber);
+    border-radius: 50%;
+  }
+  .tempo-name {
+    font-family: 'Funnel Display', sans-serif;
+    font-size: 17px;
+    font-weight: 800;
+    color: #fff;
+    margin-bottom: 4px;
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+  }
+  .tempo-when {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9.5px;
+    color: var(--text-mute);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-weight: 500;
+    margin-bottom: 14px;
+  }
+  .tempo-cost {
+    font-family: 'Funnel Display', sans-serif;
+    font-size: 32px;
+    font-weight: 800;
+    line-height: 1;
+    color: #fff;
+    font-variant-numeric: tabular-nums;
+    margin-bottom: 4px;
+  }
+  .tempo.full .tempo-cost { color: var(--amber); }
+  .tempo-cost-sub {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--text-mute);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-weight: 600;
+    margin-bottom: 16px;
+  }
+  .tempo-stats {
+    border-top: 1px dashed var(--border-hi);
+    padding-top: 12px;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+  .tempo-stat {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 12px;
+    align-items: baseline;
+  }
+  .tempo-stat .lbl {
+    font-size: 11px;
+    color: var(--text-dim);
+    font-weight: 400;
+  }
+  .tempo-stat .val {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: #fff;
+    font-variant-numeric: tabular-nums;
+    font-weight: 700;
+  }
+
+  /* COST BREAKDOWN */
+  .breakdown {
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .bd-cat {
+    background: var(--panel);
+    padding: 12px 16px;
+    display: grid;
+    grid-template-columns: 140px 1fr 100px;
+    gap: 16px;
+    align-items: center;
+    border-bottom: 1px solid var(--border-hi);
+  }
+  .bd-cat-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--amber);
+    font-weight: 700;
+  }
+  .bd-cat-bar {
+    height: 6px;
+    background: rgba(251,191,36,0.08);
+    border-radius: 1px;
+    overflow: hidden;
+    position: relative;
+  }
+  .bd-cat-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--amber), var(--amber-dim));
+  }
+  .bd-cat-total {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    color: #fff;
+    font-weight: 700;
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+  }
+  .bd-row {
+    display: grid;
+    grid-template-columns: 140px 1fr 100px;
+    gap: 16px;
+    padding: 8px 16px;
+    border-bottom: 1px solid var(--border);
+    font-size: 11.5px;
+    align-items: center;
+  }
+  .bd-row:last-child { border-bottom: none; }
+  .bd-row .tool {
+    color: #fff;
+    font-weight: 600;
+  }
+  .bd-row .why {
+    color: var(--text-dim);
+    font-size: 10.5px;
+    font-weight: 400;
+  }
+  .bd-row .price {
+    font-family: 'JetBrains Mono', monospace;
+    color: #fff;
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+    font-weight: 500;
+  }
+  .bd-total {
+    background: rgba(251,191,36,0.06);
+    padding: 14px 16px;
+    display: grid;
+    grid-template-columns: 1fr 100px;
+    gap: 16px;
+    align-items: center;
+    border-top: 1px solid rgba(251,191,36,0.3);
+  }
+  .bd-total-l {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--amber);
+    font-weight: 700;
+  }
+  .bd-total-r {
+    font-family: 'Funnel Display', sans-serif;
+    font-size: 22px;
+    color: var(--amber);
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+    font-weight: 800;
+  }
+
+  /* ECONOMICS FLOW */
+  .flow {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr auto 1fr;
+    gap: 0;
+    align-items: stretch;
+  }
+  .flow-node {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 14px 12px;
+    text-align: center;
+    min-height: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .flow-node.hi {
+    border-color: rgba(251,191,36,0.4);
+    background: linear-gradient(180deg, rgba(251,191,36,0.06), var(--panel));
+  }
+  .flow-arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--amber);
+    font-size: 18px;
+    font-weight: 700;
+    padding: 0 8px;
+  }
+  .flow-lbl {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--text-mute);
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .flow-val {
+    font-family: 'Funnel Display', sans-serif;
+    font-size: 22px;
+    font-weight: 800;
+    color: #fff;
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+    margin-bottom: 6px;
+  }
+  .flow-node.hi .flow-val { color: var(--amber); }
+  .flow-sub {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 500;
+  }
+
+  /* SCENARIOS */
+  .scenarios {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+  }
+  .scenario {
+    border: 1px solid var(--border);
+    background: var(--panel);
+    border-radius: 4px;
+    padding: 20px 18px;
+    position: relative;
+  }
+  .scenario.hi {
+    border-color: rgba(251,191,36,0.4);
+    background: linear-gradient(180deg, rgba(251,191,36,0.06), var(--panel) 70%);
+  }
+  .scen-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    color: var(--amber);
+    margin-bottom: 14px;
+    font-weight: 700;
+  }
+  .scen-pipeline {
+    font-family: 'Funnel Display', sans-serif;
+    font-size: 38px;
+    font-weight: 800;
+    color: #fff;
+    line-height: 1;
+    margin-bottom: 6px;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.02em;
+  }
+  .scenario.hi .scen-pipeline {
+    color: var(--amber);
+  }
+  .scen-pipeline-sub {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--text-dim);
+    margin-bottom: 18px;
+    letter-spacing: 0.04em;
+    font-weight: 400;
+    text-transform: uppercase;
+  }
+  .scen-pipeline-sub strong {
+    color: #fff;
+    font-weight: 700;
+  }
+  .scen-math {
+    border-top: 1px dashed var(--border-hi);
+    padding-top: 14px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-variant-numeric: tabular-nums;
+  }
+  .scen-math-h {
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--amber);
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+  .m-line {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 12px;
+    padding: 4px 0;
+    align-items: baseline;
+  }
+  .m-line .ml {
+    color: var(--text-dim);
+    font-weight: 400;
+  }
+  .m-line .mr {
+    color: #fff;
+    font-weight: 700;
+    text-align: right;
+  }
+  .m-line.input .ml { color: #fff; font-weight: 600; }
+  .m-line.total {
+    border-top: 1px solid var(--border-hi);
+    margin-top: 4px;
+    padding-top: 8px;
+  }
+  .m-line.total .mr {
+    color: var(--amber);
+    font-size: 12.5px;
+  }
+  .scen-note {
+    margin-top: 16px;
+    padding: 14px 18px;
+    border: 1px solid rgba(251,191,36,0.25);
+    background: rgba(251,191,36,0.04);
+    border-radius: 4px;
+    font-size: 12px;
+    line-height: 1.55;
+    color: #fff;
+    font-weight: 400;
+  }
+  .scen-note strong {
+    font-weight: 700;
+  }
+
+  /* GUARDRAILS */
+  .guards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .guard-block {
+    border: 1px solid var(--border);
+    background: var(--panel);
+    border-radius: 4px;
+    padding: 16px 18px;
+  }
+  .guard-block.amber {
+    border-color: rgba(251,191,36,0.3);
+    background: linear-gradient(180deg, rgba(251,191,36,0.04), var(--panel) 80%);
+  }
+  .guard-h {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--amber);
+    font-weight: 700;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .guard-list {
+    list-style: none;
+    font-size: 12px;
+    line-height: 1.55;
+    font-weight: 400;
+  }
+  .guard-list li {
+    padding: 5px 0 5px 14px;
+    color: var(--text-dim);
+    position: relative;
+  }
+  .guard-list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 12px;
+    width: 6px;
+    height: 1px;
+    background: var(--amber);
+  }
+  .guard-list li strong {
+    color: #fff;
+    font-weight: 700;
+  }
+
+  /* FOOTER */
+  .footer {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    color: var(--text-faint);
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    font-weight: 700;
+  }
+  .footer .right { color: var(--text-mute); font-weight: 500; }
+
+  @media print {
+    body, html { background: white; color: #1e293b; }
+    .page { background: white; max-width: none; padding: 24px; }
+    .display, .title { color: #0f172a; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="brand">
+      <div class="logo"></div>
+      <div class="brand-text">
+        <div class="name">VISIBLE EDGE</div>
+        <div class="sub">Lead Operations / CMMC Vertical</div>
+      </div>
+    </div>
+    <div class="header-meta">
+      <div><span class="label">DOC</span> <span class="val">OPS_BRIEF_001</span></div>
+      <div><span class="label">DATE</span> <span class="val">APR 30 2026</span></div>
+      <div><span class="label">STATUS</span> <span class="live">READY</span></div>
+    </div>
+  </header>
+
+  <!-- TITLE -->
+  <div class="title-block">
+    <div class="title-eyebrow">OPERATIONAL BRIEF / ONE PAGE</div>
+    <h1 class="title">A daily lead engine that <em>compounds</em><br/>against a hard November deadline.</h1>
+    <p class="title-sub">An automated pipeline that turns 80,000 unprepared DoD contractors into a prioritized, dossier-attached daily call queue — refreshed every morning, sharpened every night, designed to push call-to-meeting conversion from baseline 1% to 4%+ before the Phase 2 enforcement window closes.</p>
+  </div>
+
+  <!-- MARKET STRIP -->
+  <div class="strip">
+    <div class="strip-cell">
+      <div class="strip-label">Total Universe</div>
+      <div class="strip-val tab"><span class="accent">~80K</span></div>
+      <div class="strip-sub">Sub-100 EMP DoD contractors</div>
+    </div>
+    <div class="strip-cell">
+      <div class="strip-label">Currently Compliant</div>
+      <div class="strip-val tab">~1%</div>
+      <div class="strip-sub">~800 of ~80K · Redspin '26</div>
+    </div>
+    <div class="strip-cell">
+      <div class="strip-label">Phase 2 Deadline</div>
+      <div class="strip-val tab"><span class="accent">NOV 10</span></div>
+      <div class="strip-sub">194 days from today</div>
+    </div>
+    <div class="strip-cell">
+      <div class="strip-label">Daily Throughput Target</div>
+      <div class="strip-val tab">100–200</div>
+      <div class="strip-sub">enriched leads / day</div>
+    </div>
+  </div>
+
+  <!-- SYSTEM ARCHITECTURE -->
+  <section>
+    <div class="section-h">
+      <span class="num">/ 01</span>
+      <span class="title-h">SYSTEM ARCHITECTURE</span>
+      <span class="line"></span>
+    </div>
+
+    <div class="pipeline">
+      <div class="stage">
+        <div class="stage-num">STAGE A</div>
+        <div class="stage-name">UNIVERSE BUILDER</div>
+        <div class="stage-desc">Pulls federal data nightly. Filters by NAICS, employee count, DoD obligation history. Builds the qualified target pool.</div>
+        <div class="stage-tools">
+          <span class="tool-tag dim">SAM.gov</span>
+          <span class="tool-tag dim">USAspending</span>
+          <span class="tool-tag dim">SBA</span>
+        </div>
+      </div>
+      <div class="stage">
+        <div class="stage-num">STAGE B</div>
+        <div class="stage-name">ENRICHMENT</div>
+        <div class="stage-desc">Resolves 2–4 verified decision-makers per target. Email + phone + LinkedIn. Authority scoring.</div>
+        <div class="stage-tools">
+          <span class="tool-tag blue">Apollo</span>
+          <span class="tool-tag blue">Clay</span>
+          <span class="tool-tag blue">Seamless</span>
+          <span class="tool-tag blue">Hunter</span>
+        </div>
+      </div>
+      <div class="stage">
+        <div class="stage-num">STAGE C</div>
+        <div class="stage-name">DOSSIER ENGINE</div>
+        <div class="stage-desc">Cloud orchestrator routes work to the right model: Haiku for parsing & classification, Gemini for long-context summarization, Sonnet for opener & talk track.</div>
+        <div class="stage-tools">
+          <span class="tool-tag">Haiku 4.5</span>
+          <span class="tool-tag">Sonnet 4.7</span>
+          <span class="tool-tag">Gemini Flash</span>
+        </div>
+      </div>
+      <div class="stage">
+        <div class="stage-num">STAGE D</div>
+        <div class="stage-name">SALES SURFACE</div>
+        <div class="stage-desc">Daily prioritized queue. Dossier viewer. One-tap outcome capture. Mobile-ready. Built on the rep's existing day.</div>
+        <div class="stage-tools">
+          <span class="tool-tag green">Next.js</span>
+          <span class="tool-tag green">NeonDB</span>
+        </div>
+      </div>
+      <div class="stage">
+        <div class="stage-num">STAGE E</div>
+        <div class="stage-name">FEEDBACK LOOP</div>
+        <div class="stage-desc">Today's call outcomes train tomorrow's queue. Heuristic week 1, regression week 4, XGBoost from week 12.</div>
+        <div class="stage-tools">
+          <span class="tool-tag">XGBoost</span>
+          <span class="tool-tag">Python</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="loop-back">
+      <div class="loop-icon">↺</div>
+      <div class="loop-text">
+        <strong>Closed feedback loop.</strong> Every disposition logged today (no-answer, voicemail, interested, booked, closed, lost) becomes a training signal tonight. Tomorrow's queue is reordered by predicted P(booked) and P(closed). Iteration cycle: <strong>24 hours.</strong> The longer it runs, the better it gets — without manual tuning.
+      </div>
+    </div>
+  </section>
+
+  <!-- TWO COLUMN: DAILY LOOP + STACK -->
+  <section>
+    <div class="two-col">
+
+      <div>
+        <div class="section-h">
+          <span class="num">/ 02</span>
+          <span class="title-h">DAILY OPERATING LOOP</span>
+          <span class="line"></span>
+        </div>
+        <div class="timeline">
+          <div class="tl-row hi">
+            <div class="tl-time">06:00</div>
+            <div class="tl-event">Universe delta refresh — new SAM/USAspending entries flagged</div>
+          </div>
+          <div class="tl-row">
+            <div class="tl-time">06:15</div>
+            <div class="tl-event">Enrichment pipeline runs on tomorrow's 200-lead queue</div>
+          </div>
+          <div class="tl-row">
+            <div class="tl-time">06:45</div>
+            <div class="tl-event">Cloud orchestrator routes work and generates dossiers via API waterfall</div>
+          </div>
+          <div class="tl-row hi">
+            <div class="tl-time">07:00</div>
+            <div class="tl-event">Sales rep opens dashboard — queue is loaded, sorted, ready to dial</div>
+          </div>
+          <div class="tl-row">
+            <div class="tl-time">08:00–17:00</div>
+            <div class="tl-event">Calls run. One-tap outcome logging. Booked meetings drop into pipeline view</div>
+          </div>
+          <div class="tl-row">
+            <div class="tl-time">18:00</div>
+            <div class="tl-event">Outcome ETL job — disposition data normalized into training set</div>
+          </div>
+          <div class="tl-row">
+            <div class="tl-time">23:00</div>
+            <div class="tl-event">Model refit on new data — feature weights updated</div>
+          </div>
+          <div class="tl-row hi">
+            <div class="tl-time">00:00</div>
+            <div class="tl-event">Tomorrow's queue scored, prioritized, locked. Ready by 7 AM.</div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="section-h">
+          <span class="num">/ 03</span>
+          <span class="title-h">TECHNOLOGY STACK</span>
+          <span class="line"></span>
+        </div>
+        <div class="stack">
+          <div class="stack-row head">
+            <div>Layer</div>
+            <div>Tool</div>
+            <div>Function</div>
+          </div>
+          <div class="stack-row">
+            <div class="stack-layer">DATA</div>
+            <div class="stack-tool">SAM · USAspending</div>
+            <div class="stack-purpose">Federal contractor universe</div>
+          </div>
+          <div class="stack-row">
+            <div class="stack-layer">ENRICH</div>
+            <div class="stack-tool">Apollo + Clay</div>
+            <div class="stack-purpose">Decision-maker resolution</div>
+          </div>
+          <div class="stack-row">
+            <div class="stack-layer">VERIFY</div>
+            <div class="stack-tool">Hunter · Seamless</div>
+            <div class="stack-purpose">Email & phone validation</div>
+          </div>
+          <div class="stack-row">
+            <div class="stack-layer">ORCHESTRATOR</div>
+            <div class="stack-tool">Haiku 4.5</div>
+            <div class="stack-purpose">Routing · parsing · classification</div>
+          </div>
+          <div class="stack-row">
+            <div class="stack-layer">REASONING</div>
+            <div class="stack-tool">Sonnet 4.7 · Gemini</div>
+            <div class="stack-purpose">Dossier · opener · talk track</div>
+          </div>
+          <div class="stack-row">
+            <div class="stack-layer">DATABASE</div>
+            <div class="stack-tool">NeonDB · Postgres</div>
+            <div class="stack-purpose">Targets · contacts · outcomes</div>
+          </div>
+          <div class="stack-row">
+            <div class="stack-layer">FRONTEND</div>
+            <div class="stack-tool">Next.js</div>
+            <div class="stack-purpose">Sales surface · admin</div>
+          </div>
+          <div class="stack-row">
+            <div class="stack-layer">ML</div>
+            <div class="stack-tool">XGBoost · Python</div>
+            <div class="stack-purpose">Priority scoring · forecasting</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- BUILD PHASES -->
+  <section>
+    <div class="section-h">
+      <span class="num">/ 04</span>
+      <span class="title-h">BUILD PHASES</span>
+      <span class="line"></span>
+    </div>
+    <div class="weeks">
+      <div class="week">
+        <div class="week-num">PHASE 01</div>
+        <div class="week-title">Universe & Enrichment</div>
+        <div class="week-deliv">
+          <strong>Deliverable</strong>
+          500 fully-enriched leads in CRM with verified decision-makers. Sales rep starts calling immediately.
+        </div>
+      </div>
+      <div class="week">
+        <div class="week-num">PHASE 02</div>
+        <div class="week-title">Dossier Engine</div>
+        <div class="week-deliv">
+          <strong>Deliverable</strong>
+          Per-lead one-pagers with AI opener, talk track, contract context, and objection handlers.
+        </div>
+      </div>
+      <div class="week">
+        <div class="week-num">PHASE 03</div>
+        <div class="week-title">Sales Surface</div>
+        <div class="week-deliv">
+          <strong>Deliverable</strong>
+          Visible Edge dashboard live. Spreadsheets retired. One-tap outcome capture in production.
+        </div>
+      </div>
+      <div class="week">
+        <div class="week-num">PHASE 04</div>
+        <div class="week-title">Feedback Loop</div>
+        <div class="week-deliv">
+          <strong>Deliverable</strong>
+          Closed ML loop running. Today's call outcomes measurably reorder tomorrow's queue.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- UI PREVIEW -->
+  <section>
+    <div class="section-h">
+      <span class="num">/ 05</span>
+      <span class="title-h">SALES SURFACE — DAILY QUEUE PREVIEW</span>
+      <span class="line"></span>
+    </div>
+    <div class="ui-preview">
+      <div class="ui-frame">
+        <div class="ui-h">
+          <div class="l">TODAY'S QUEUE — APR 30</div>
+          <div class="r">10 leads · ML scored · 6 high-priority</div>
+        </div>
+        <div class="ui-row">
+          <div class="n">01</div>
+          <div><span class="name">Apex Precision Aerospace</span> <span class="meta"> · Wichita KS · 47 EMP · $2.8M DoD</span></div>
+          <div><span class="badge amber">RECOMPETE Q3</span></div>
+          <div class="meta">94</div>
+        </div>
+        <div class="ui-row">
+          <div class="n">02</div>
+          <div><span class="name">Ironhall Tactical Systems</span> <span class="meta"> · Manchester NH · 31 EMP · $1.6M DoD</span></div>
+          <div><span class="badge red">CUI EXPOSURE</span></div>
+          <div class="meta">91</div>
+        </div>
+        <div class="ui-row">
+          <div class="n">03</div>
+          <div><span class="name">Helix Engineering Group</span> <span class="meta"> · Huntsville AL · 88 EMP · $5.2M DoD</span></div>
+          <div><span class="badge amber">RECOMPETE Q4</span></div>
+          <div class="meta">89</div>
+        </div>
+        <div class="ui-row">
+          <div class="n">04</div>
+          <div><span class="name">Stellar Composites Inc</span> <span class="meta"> · San Diego CA · 62 EMP · $1.9M DoD</span></div>
+          <div><span class="badge red">CUI EXPOSURE</span></div>
+          <div class="meta">86</div>
+        </div>
+        <div class="ui-row">
+          <div class="n">05</div>
+          <div><span class="name">Cipher Defense IT</span> <span class="meta"> · Reston VA · 54 EMP · $3.1M DoD</span></div>
+          <div><span class="badge amber">IRONIC</span></div>
+          <div class="meta">83</div>
+        </div>
+        <div class="ui-row">
+          <div class="n">06</div>
+          <div><span class="name">Coastal Maritime Defense</span> <span class="meta"> · Norfolk VA · 76 EMP · $4.2M DoD</span></div>
+          <div><span class="badge amber">PRIME</span></div>
+          <div class="meta">81</div>
+        </div>
+        <div class="ui-row">
+          <div class="n">07</div>
+          <div><span class="name">Granite State Machining</span> <span class="meta"> · Concord NH · 28 EMP · $920K DoD</span></div>
+          <div><span class="badge blue">STEADY</span></div>
+          <div class="meta">79</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- METRICS -->
+  <section>
+    <div class="section-h">
+      <span class="num">/ 06</span>
+      <span class="title-h">SUCCESS METRICS BY MILESTONE</span>
+      <span class="line"></span>
+    </div>
+    <div class="metrics">
+      <div class="metric">
+        <div class="metric-h">PHASE 01 LIVE</div>
+        <ul class="metric-list">
+          <li>Qualified universe <span class="v">≥ 5,000</span></li>
+          <li>Enriched leads delivered <span class="v">500</span></li>
+          <li>Calls made by rep <span class="v">≥ 250</span></li>
+          <li>Booked meeting rate <span class="v">≥ 1%</span></li>
+        </ul>
+      </div>
+      <div class="metric">
+        <div class="metric-h">FULL SYSTEM LIVE</div>
+        <ul class="metric-list">
+          <li>Daily throughput <span class="v">100–200</span></li>
+          <li>Booked meeting rate <span class="v">≥ 2%</span></li>
+          <li>First closes attributable <span class="v">≥ 1</span></li>
+          <li>Loop iteration time <span class="v">24 hr</span></li>
+        </ul>
+      </div>
+      <div class="metric">
+        <div class="metric-h">STEADY STATE</div>
+        <ul class="metric-list">
+          <li>Booked meeting rate <span class="v">≥ 4%</span></li>
+          <li>Close rate on bookings <span class="v">≥ 25%</span></li>
+          <li>ML model AUC <span class="v">≥ 0.78</span></li>
+          <li>Targets contacted <span class="v">~7,500</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div>VISIBLE EDGE / OPS BRIEF 001</div>
+    <div class="right">CONFIDENTIAL · INTERNAL DRAFT</div>
+  </footer>
+
+  <!-- ============================================ -->
+  <!-- PAGE 02 — FINANCIAL PLAN                     -->
+  <!-- ============================================ -->
+
+  <div class="page-break"></div>
+
+  <!-- HEADER P2 -->
+  <header class="header" style="margin-top:30px;">
+    <div class="brand">
+      <div class="logo"></div>
+      <div class="brand-text">
+        <div class="name">VISIBLE EDGE</div>
+        <div class="sub">Financial Plan / Monthly Operating Budget</div>
+      </div>
+    </div>
+    <div class="header-meta">
+      <div><span class="label">DOC</span> <span class="val">FIN_PLAN_001</span></div>
+      <div><span class="label">PAGE</span> <span class="val">02 / 02</span></div>
+      <div><span class="label">STATUS</span> <span class="live">READY</span></div>
+    </div>
+  </header>
+
+  <!-- TITLE P2 -->
+  <div class="title-block">
+    <div class="title-eyebrow">FINANCIAL PLAN / MONTHLY BUDGET</div>
+    <h1 class="title">What it costs to run.<br/>What it produces in return.</h1>
+    <p class="title-sub">Three operating tempos, each with a clear cost envelope and expected output. The system is designed to scale sub-linearly — doubling lead volume from 100 to 200 per day adds tooling cost of roughly 75%, not 100%, because most platforms price by capacity tier, not consumption. Cost-per-lead drops as throughput rises.</p>
+  </div>
+
+  <!-- KEY NUMBERS STRIP -->
+  <div class="strip">
+    <div class="strip-cell">
+      <div class="strip-label">Full Ramp Monthly</div>
+      <div class="strip-val tab"><span class="accent">$2,581</span></div>
+      <div class="strip-sub">200 leads/day target</div>
+    </div>
+    <div class="strip-cell">
+      <div class="strip-label">Cost Per Lead</div>
+      <div class="strip-val tab">$0.43</div>
+      <div class="strip-sub">All-in, full ramp</div>
+    </div>
+    <div class="strip-cell">
+      <div class="strip-label">Monthly Authorization</div>
+      <div class="strip-val tab">$3,000</div>
+      <div class="strip-sub">Includes 16% buffer</div>
+    </div>
+    <div class="strip-cell">
+      <div class="strip-label">Expected Pipeline Value</div>
+      <div class="strip-val tab"><span class="accent">$600K</span></div>
+      <div class="strip-sub">Monthly · Mid-case · 232x ROI</div>
+    </div>
+  </div>
+
+  <!-- 01 OPERATING TEMPOS -->
+  <section>
+    <div class="section-h">
+      <span class="num">/ 01</span>
+      <span class="title-h">OPERATING TEMPOS</span>
+      <span class="line"></span>
+    </div>
+
+    <div class="tempos">
+      <div class="tempo">
+        <div class="tempo-tag"><span class="dot"></span> PHASE 01 · VALIDATION</div>
+        <div class="tempo-name">Lean MVP</div>
+        <div class="tempo-when">Month 01 · Ramp & Prove</div>
+        <div class="tempo-cost tab">$670</div>
+        <div class="tempo-cost-sub">/ month</div>
+        <div class="tempo-stats">
+          <div class="tempo-stat"><span class="lbl">Daily lead throughput</span><span class="val">50</span></div>
+          <div class="tempo-stat"><span class="lbl">Monthly enriched leads</span><span class="val">~1,500</span></div>
+          <div class="tempo-stat"><span class="lbl">Expected booked meetings</span><span class="val">~15</span></div>
+          <div class="tempo-stat"><span class="lbl">Cost per lead</span><span class="val">$0.45</span></div>
+        </div>
+      </div>
+
+      <div class="tempo">
+        <div class="tempo-tag"><span class="dot"></span> PHASE 02 · SCALING</div>
+        <div class="tempo-name">Steady State</div>
+        <div class="tempo-when">Months 02–03 · Tune & Grow</div>
+        <div class="tempo-cost tab">$1,455</div>
+        <div class="tempo-cost-sub">/ month</div>
+        <div class="tempo-stats">
+          <div class="tempo-stat"><span class="lbl">Daily lead throughput</span><span class="val">100</span></div>
+          <div class="tempo-stat"><span class="lbl">Monthly enriched leads</span><span class="val">~3,000</span></div>
+          <div class="tempo-stat"><span class="lbl">Expected booked meetings</span><span class="val">~75</span></div>
+          <div class="tempo-stat"><span class="lbl">Cost per lead</span><span class="val">$0.49</span></div>
+        </div>
+      </div>
+
+      <div class="tempo full">
+        <div class="tempo-tag"><span class="dot"></span> PHASE 03 · TARGET</div>
+        <div class="tempo-name">Full Ramp</div>
+        <div class="tempo-when">Month 04+ · Loop Optimized</div>
+        <div class="tempo-cost tab">$2,581</div>
+        <div class="tempo-cost-sub">/ month</div>
+        <div class="tempo-stats">
+          <div class="tempo-stat"><span class="lbl">Daily lead throughput</span><span class="val">200</span></div>
+          <div class="tempo-stat"><span class="lbl">Monthly enriched leads</span><span class="val">~6,000</span></div>
+          <div class="tempo-stat"><span class="lbl">Expected booked meetings</span><span class="val">~240</span></div>
+          <div class="tempo-stat"><span class="lbl">Cost per lead</span><span class="val">$0.43</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 02 COST BREAKDOWN -->
+  <section>
+    <div class="section-h">
+      <span class="num">/ 02</span>
+      <span class="title-h">COST BREAKDOWN — FULL RAMP</span>
+      <span class="line"></span>
+    </div>
+
+    <div class="breakdown">
+
+      <div class="bd-cat">
+        <div class="bd-cat-label">Infrastructure</div>
+        <div class="bd-cat-bar"><div class="bd-cat-bar-fill" style="width:7%"></div></div>
+        <div class="bd-cat-total">$169</div>
+      </div>
+      <div class="bd-row">
+        <div class="tool">NeonDB Scale</div>
+        <div class="why">Targets, contacts, outcomes, ML training data</div>
+        <div class="price">$69</div>
+      </div>
+      <div class="bd-row">
+        <div class="tool">DigitalOcean</div>
+        <div class="why">Orchestrator + cron jobs + ML refit jobs</div>
+        <div class="price">$80</div>
+      </div>
+      <div class="bd-row">
+        <div class="tool">Vercel Pro</div>
+        <div class="why">Sales dashboard hosting</div>
+        <div class="price">$20</div>
+      </div>
+
+      <div class="bd-cat">
+        <div class="bd-cat-label">Data & Enrichment</div>
+        <div class="bd-cat-bar"><div class="bd-cat-bar-fill" style="width:50%"></div></div>
+        <div class="bd-cat-total">$1,299</div>
+      </div>
+      <div class="bd-row">
+        <div class="tool">Clay Pro</div>
+        <div class="why">Decision-maker resolution waterfall · 50K credits</div>
+        <div class="price">$800</div>
+      </div>
+      <div class="bd-row">
+        <div class="tool">Seamless.ai Pro</div>
+        <div class="why">Phone number waterfall</div>
+        <div class="price">$300</div>
+      </div>
+      <div class="bd-row">
+        <div class="tool">Hunter.io Business</div>
+        <div class="why">Email verification · 10K/mo</div>
+        <div class="price">$199</div>
+      </div>
+
+      <div class="bd-cat">
+        <div class="bd-cat-label">AI Intelligence</div>
+        <div class="bd-cat-bar"><div class="bd-cat-bar-fill" style="width:21%"></div></div>
+        <div class="bd-cat-total">$550</div>
+      </div>
+      <div class="bd-row">
+        <div class="tool">Claude Sonnet 4.7</div>
+        <div class="why">Dossier opener, talk track, objection handlers</div>
+        <div class="price">$300</div>
+      </div>
+      <div class="bd-row">
+        <div class="tool">Claude Haiku 4.5</div>
+        <div class="why">Orchestration · routing · parsing · classification</div>
+        <div class="price">$150</div>
+      </div>
+      <div class="bd-row">
+        <div class="tool">Gemini Flash</div>
+        <div class="why">Long-context contract history summarization</div>
+        <div class="price">$100</div>
+      </div>
+
+      <div class="bd-cat">
+        <div class="bd-cat-label">Outbound Tooling</div>
+        <div class="bd-cat-bar"><div class="bd-cat-bar-fill" style="width:22%"></div></div>
+        <div class="bd-cat-total">$563</div>
+      </div>
+      <div class="bd-row">
+        <div class="tool">PhoneBurner</div>
+        <div class="why">Power dialer for the rep</div>
+        <div class="price">$149</div>
+      </div>
+      <div class="bd-row">
+        <div class="tool">Smartlead Custom</div>
+        <div class="why">Email follow-up sequencing</div>
+        <div class="price">$174</div>
+      </div>
+      <div class="bd-row">
+        <div class="tool">Domain & inbox warming</div>
+        <div class="why">5 sending domains · 8 warmed inboxes</div>
+        <div class="price">$240</div>
+      </div>
+
+      <div class="bd-total">
+        <div class="bd-total-l">Total Monthly Operating Cost · Full Ramp</div>
+        <div class="bd-total-r tab">$2,581</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 PIPELINE SCENARIOS -->
+  <section>
+    <div class="section-h">
+      <span class="num">/ 03</span>
+      <span class="title-h">PIPELINE SCENARIOS — THE MATH AT FULL RAMP</span>
+      <span class="line"></span>
+    </div>
+
+    <div class="scenarios">
+
+      <!-- CONSERVATIVE -->
+      <div class="scenario">
+        <div class="scen-tag">CONSERVATIVE / FLOOR</div>
+        <div class="scen-pipeline tab">$202K</div>
+        <div class="scen-pipeline-sub">monthly pipeline · <strong>78x ROI</strong> on tooling</div>
+        <div class="scen-math">
+          <div class="scen-math-h">Math</div>
+          <div class="m-line input"><span class="ml">6,000 leads</span><span class="mr">input</span></div>
+          <div class="m-line"><span class="ml">× 1.5% booked rate</span><span class="mr">90 mtgs</span></div>
+          <div class="m-line"><span class="ml">× 15% close rate</span><span class="mr">14 closes</span></div>
+          <div class="m-line total"><span class="ml">× $15K avg contract</span><span class="mr">$202K</span></div>
+        </div>
+      </div>
+
+      <!-- EXPECTED -->
+      <div class="scenario hi">
+        <div class="scen-tag">EXPECTED / MID</div>
+        <div class="scen-pipeline tab">$600K</div>
+        <div class="scen-pipeline-sub">monthly pipeline · <strong>232x ROI</strong> on tooling</div>
+        <div class="scen-math">
+          <div class="scen-math-h">Math</div>
+          <div class="m-line input"><span class="ml">6,000 leads</span><span class="mr">input</span></div>
+          <div class="m-line"><span class="ml">× 2.5% booked rate</span><span class="mr">150 mtgs</span></div>
+          <div class="m-line"><span class="ml">× 20% close rate</span><span class="mr">30 closes</span></div>
+          <div class="m-line total"><span class="ml">× $20K avg contract</span><span class="mr">$600K</span></div>
+        </div>
+      </div>
+
+      <!-- OPTIMISTIC -->
+      <div class="scenario">
+        <div class="scen-tag">OPTIMISTIC / TARGET</div>
+        <div class="scen-pipeline tab">$1.5M</div>
+        <div class="scen-pipeline-sub">monthly pipeline · <strong>581x ROI</strong> on tooling</div>
+        <div class="scen-math">
+          <div class="scen-math-h">Math</div>
+          <div class="m-line input"><span class="ml">6,000 leads</span><span class="mr">input</span></div>
+          <div class="m-line"><span class="ml">× 4% booked rate</span><span class="mr">240 mtgs</span></div>
+          <div class="m-line"><span class="ml">× 25% close rate</span><span class="mr">60 closes</span></div>
+          <div class="m-line total"><span class="ml">× $25K avg contract</span><span class="mr">$1.5M</span></div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="scen-note">
+      <strong>The economics survive being meaningfully wrong.</strong> Even in the Conservative case — half the booked-meeting rate of best-in-class outbound, 60% of typical close rates on warm meetings, and a smaller average ticket dominated by L1 quick-wins — the system produces a 78x return on monthly tooling cost. The Expected case is the realistic working assumption: the ML feedback loop converges toward it over months 3–6 as the model learns from outcomes. Conservative is what month 1–2 looks like before the loop has trained.
+    </div>
+  </section>
+
+  <!-- 04 BUDGET ENVELOPE & EXPECTATIONS -->
+  <section>
+    <div class="section-h">
+      <span class="num">/ 04</span>
+      <span class="title-h">BUDGET ENVELOPE & EXPECTATIONS</span>
+      <span class="line"></span>
+    </div>
+
+    <div class="guards">
+      <div class="guard-block amber">
+        <div class="guard-h">RECOMMENDED AUTHORIZATION</div>
+        <ul class="guard-list">
+          <li><strong>$3,000/mo cap</strong> on the funding card — covers full ramp with a 16% buffer for credit overages.</li>
+          <li><strong>Hard alert at $3,500/mo</strong> — automated notification before any surprise spend.</li>
+          <li><strong>Card auto-pause</strong> — if billing fails, system gracefully pauses tomorrow's queue. No surprise debt.</li>
+          <li><strong>Admin access shared</strong> — both parties see real-time tool spend in a single dashboard.</li>
+        </ul>
+      </div>
+
+      <div class="guard-block">
+        <div class="guard-h">WHAT'S INCLUDED</div>
+        <ul class="guard-list">
+          <li><strong>All tooling</strong> — data, enrichment, AI, outbound, hosting, database.</li>
+          <li><strong>Domain & inbox warming</strong> — pre-warmed by month 2 to avoid spam filters.</li>
+          <li><strong>System maintenance</strong> — orchestrator updates, model swaps, ETL fixes.</li>
+          <li><strong>Spend transparency</strong> — monthly itemized report on every line.</li>
+        </ul>
+      </div>
+
+      <div class="guard-block">
+        <div class="guard-h">NOT INCLUDED</div>
+        <ul class="guard-list">
+          <li><strong>CRM seat fees</strong> — assumes existing HubSpot Free or Pipedrive ($0–50/seat/mo).</li>
+          <li><strong>LinkedIn Sales Navigator</strong> — optional, $99/seat/mo, recommended at full ramp.</li>
+          <li><strong>List augmentation buys</strong> — occasional one-off ZoomInfo/Cognism pulls if Clay hit-rate dips, $200–500 ad hoc.</li>
+          <li><strong>TCPA compliance review</strong> — one-time $1,500 with defense-bar attorney for cold-call script.</li>
+        </ul>
+      </div>
+
+      <div class="guard-block">
+        <div class="guard-h">RISK & MITIGATION</div>
+        <ul class="guard-list">
+          <li><strong>Provider rate limits</strong> — multi-vendor abstraction, automatic failover between Claude, Gemini, GPT.</li>
+          <li><strong>Enrichment hit-rate dips</strong> — waterfall across 4 providers; reject leads with fewer than 2 verified contacts.</li>
+          <li><strong>Salesperson capacity</strong> — system throttles to match what the rep can actually work.</li>
+          <li><strong>Deadline drift</strong> — secondary verticals identified (NIST 800-171, HIPAA) for pipeline diversification.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER P2 -->
+  <footer class="footer">
+    <div>VISIBLE EDGE / FIN PLAN 001</div>
+    <div class="right">CONFIDENTIAL · INTERNAL DRAFT</div>
+  </footer>
+
+</div>
+</body>
+</html>
